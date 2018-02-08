@@ -92,13 +92,11 @@ void DarthVector<T>::insert(int index, T item) {
     } else {
         T *shifted = (T *) malloc((this->vec_size - index) * sizeof(T));
         for(int i = 0; i < this->vec_size - index; i++) {
-            *(shifted + i) = *(this->elements + i + index);
-            std::cout << "SHIFTED " <<  *(shifted + i) << std::endl;
+            *(shifted + i) = *(this->elements + i + index);            
         }        
         this->vec_size++;         
-        for(int j = index; j < this->vec_size; j++) {
-            *(this->elements + j) = *(shifted + j - index);
-            std::cout << "ELEMENTS " <<  *(shifted + j - 1) << std::endl;
+        for(int j = 0; j < this->vec_size - index; j++) {
+            *(this->elements + j + index) = *(shifted + j - 1);           
         }
         *(this->elements + index) = item;        
     }
