@@ -11,9 +11,6 @@
  *  This is custom implementation of array-based data structure like vector.
  *  Basic functions of the common-used array's API are implemented.
  */
-
-#include <iostream>
-
 template<class T>
 class DarthVector {
 
@@ -115,8 +112,7 @@ DarthVector<T>::DarthVector(int capacity) {
   */  
 template<typename T>
 DarthVector<T>::~DarthVector() {
-    delete[] this->elements;
-    std::cout << "Vector was destroyed" << std::endl;
+    delete[] this->elements;   
 }
 
 /** 
