@@ -22,6 +22,7 @@ class DarthBinarySearchTree {
         void print_node(DarthNode<T> *node, int indent = 0);
         void remove_leaf(DarthNode<T> *node);
         void remove_node_with_single_child(DarthNode<T> *node);
+        void remove_node(DarthNode<T> *node);
         void insert_node(T value, DarthNode<T> *node);     
         DarthNode<T>* get_max_node(DarthNode<T> *node);
         DarthNode<T>* get_min_node(DarthNode<T> *node);
@@ -285,6 +286,27 @@ void DarthBinarySearchTree<T>::remove_node_with_single_child(DarthNode<T> *node)
 }
 
 template<typename T>
+void DarthBinarySearchTree<T>::remove_node(DarthNode<T> *node) {
+    DarthNode<T> *parent = node->parent;  
+    if(parent->left == node) {       
+        DarthNode<T> *min = this->get_min_node(node->right);
+        std::cout << "Min: " << min->value << std::endl;
+        // parent->left = min;
+        // min->parent = parent;
+        // min->left = node->left;
+        // min->right = node->right;               
+    } else {      
+        DarthNode<T> *max = this->get_max_node(node->left);  
+        std::cout << "Max: " << max->value << std::endl;
+        parent->right = max;
+        max->parent = parent;
+        // max->left = node->left;
+        max->right = node->right;        
+    }     
+    node = nullptr;
+}
+
+template<typename T>
 void DarthBinarySearchTree<T>::remove(T value) {
     DarthNode<T> *node = this->search(value); 
     if(node != nullptr) {
@@ -294,6 +316,8 @@ void DarthBinarySearchTree<T>::remove(T value) {
             this->remove_leaf(node);        
         } else if(node->left == nullptr ^ node->right == nullptr) {
             this->remove_node_with_single_child(node);           
+        } else {
+            this->remove_node(node);
         }
     }
 }
