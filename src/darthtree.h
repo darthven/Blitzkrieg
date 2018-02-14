@@ -302,7 +302,7 @@ template<typename T>
 void DarthBinarySearchTree<T>::print_node(DarthNode<T> *node, int indent) {
     if(node != nullptr) {      
         std::cout << std::setw(indent) << ' ';
-        std::cout << "(" << node->value << ", " << (node->duplicates + 1) << ")" << std::endl;    
+        std::cout << "(" << node->value << ", " << (node->duplicates) << ")" << std::endl;    
         if(node->left != nullptr) {                         
             print_node(node->left, indent + 4);
         }
